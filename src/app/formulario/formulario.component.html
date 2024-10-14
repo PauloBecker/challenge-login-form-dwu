@@ -2,22 +2,85 @@
     <div class="row justify-content-center">
       <div class="col-md-6">
         <h2>Formulário</h2>
-        <form (ngSubmit)="onSave()">
-          <div class="form-group">
+        <form class="contact-form" [formGroup]="formCadastro" (ngSubmit)="salvarDados()">
+          <!--<div class="form-group" >
             <label for="nome">Nome</label>
-            <input type="text" class="form-control" id="nome" [(ngModel)]="pessoa.nome" name="nome" [minLength]="3">
-          </div>
+            <input type="text" class="form-control" id="nome" [(ngModel)]="pessoa.nome" name="nome" placeholder="Nome" [ngModelOptions]="{standalone: true}" minlength="3" maxlength="20" pattern="[A-Za-z]*">
+          </div>-->
+          
+          <!--<label for="nome">Nome</label>
+          <input type="text" class="form-control" id="nome" [(ngModel)]="pessoa.nome" name="nome" [ngModelOptions]="{standalone: true}" required minlength="3" maxlength="20" pattern="[A-Za-z]*">-->
+        
           <div class="form-group">
-            <label for="sobrenome">Sobrenome</label>
-            <input type="text" class="form-control" id="sobrenome" [(ngModel)]="pessoa.sobrenome" name="sobrenome" [minLength]="3">
+
+            <label for="nome">Nome</label>
+            <input type="text" 
+                   class="form-control" 
+                   formcontrolname="nome" 
+                   [(ngModel)]="pessoa.nome" 
+                   [ngModelOptions]="{standalone: true}"
+                   placeholder="Digite o seu nome"
+                   [class.valid]="formCadastro.controls['nome'].valid"
+                   [class.invalid]="formCadastro.controls['nome'].invalid &&
+                   (formCadastro.controls['nome'].touched || formCadastro.controls['nome'].dirty)"
+                   required
+                   minlength="3" 
+                   maxlength="20" 
+                   pattern="[A-Za-z]*"
+                   >
           </div>
+          
+          <div 
+          *ngIf="formCadastro.controls['nome'].invalid &&
+          (formCadastro.controls['nome'].touched || formCadastro.controls['nome'].dirty)"
+      >
+          <small class="error-message" *ngIf="formCadastro.controls['nome'].hasError('minlength')">
+              Esse campo precisa de no mínimo 3 caracteres.
+          </small>
+          <small class="error-message" *ngIf="formCadastro.controls['nome'].hasError('required')">
+              Esse campo precisa ser preenchido.
+          </small>
+      </div>
+        
+      <div class="form-group">
+
+        <label for="sobrenome">Sobrenome</label>
+        <input type="text" 
+               class="form-control" 
+               formcontrolname="sobrenome" 
+               [(ngModel)]="pessoa.sobrenome" 
+               [ngModelOptions]="{standalone: true}"
+               placeholder="Digite o seu nome"
+               [class.valid]="formCadastro.controls['sobrenome'].valid"
+               [class.invalid]="formCadastro.controls['sobrenome'].invalid &&
+               (formCadastro.controls['sobrenome'].touched || formCadastro.controls['sobrenome'].dirty)"
+               required
+               minlength="3" 
+               maxlength="20" 
+               pattern="[A-Za-z]*"
+               >
+      </div>
+      
+      <div 
+      *ngIf="formCadastro.controls['sobrenome'].invalid &&
+      (formCadastro.controls['sobrenome'].touched || formCadastro.controls['sobrenome'].dirty)"
+  >
+      <small class="error-message" *ngIf="formCadastro.controls['sobrenome'].hasError('minlength')">
+          Esse campo precisa de no mínimo 3 caracteres.
+      </small>
+      <small class="error-message" *ngIf="formCadastro.controls['sobrenome'].hasError('required')">
+          Esse campo precisa ser preenchido.
+      </small>
+  </div>
+
+
           <div class="form-group">
             <label for="idade">Idade</label>
-            <input type="number" class="form-control" id="idade" [(ngModel)]="pessoa.idade" name="idade">
+            <input type="number" class="form-control" id="idade" [(ngModel)]="pessoa.idade" formcontrolname="idade" [ngModelOptions]="{standalone: true}" placeholder="Idade">
           </div>
           <div class="form-group">
             <label for="sexo">Sexo</label>
-            <select class="form-control" id="sexo" [(ngModel)]="pessoa.sexo" name="sexo">
+            <select class="form-control" id="sexo" [(ngModel)]="pessoa.sexo" [ngModelOptions]="{standalone: true}" formcontrolname="sexo">
               <option value="N">Não informado</option>
               <option value="M">Masculino</option>
               <option value="F">Feminino</option>
@@ -25,10 +88,15 @@
           </div>
           <div class="form-group">
             <label for="dataNascimento">Data de nascimento</label>
-            <input type="date" class="form-control" id="dataNascimento" [(ngModel)]="pessoa.dataNascimento" name="dataNascimento" placeholder="DD/MM/YYYY">
+            <input type="date" class="form-control" id="dataNascimento" [(ngModel)]="pessoa.dataNascimento" [ngModelOptions]="{standalone: true}" formcontrolname="dataNascimento" placeholder="DD/MM/YYYY">
           </div>
           <button type="submit" class="btn btn-primary">Salvar dados</button>
         </form>
+        <address class="iFrame">
+            <h3>DWU endereço</h3>
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3453.280905237868!2d-51.23184472379822!3d-30.05748157491708!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x951978f24bacff0f%3A0x9e58278511a0209c!2sAv.%20Praia%20de%20Belas%2C%202124%20-%20807%20-%20Praia%20de%20Belas%2C%20Porto%20Alegre%20-%20RS%2C%2090020-021!5e0!3m2!1spt-BR!2sbr!4v1728787956941!5m2!1spt-BR!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            <p> Av. Praia de Belas, 2124 , 807 , Porto Alegre, RS 90110-000, BR </p>
+          </address>
       </div>
     </div>
   </div>

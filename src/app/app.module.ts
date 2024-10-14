@@ -6,18 +6,20 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { FormularioComponent } from './formulario/formulario.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
-    FormularioComponent
+    FormularioComponent,
+    
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [
     provideClientHydration(),

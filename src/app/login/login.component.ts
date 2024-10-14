@@ -17,7 +17,7 @@ constructor(private router: Router) {}
 
 onSubmit() {
 
-  if (this.username === 'DWU' && this.password === 'DWU2024') {
+  if (this.username === 'DWU' || this.username === 'dwu' && this.password === 'DWU2024' || this.password === 'dwu2024') {
     this.router.navigate(['/formulario']);
   } else {
     this.loginError = true;
