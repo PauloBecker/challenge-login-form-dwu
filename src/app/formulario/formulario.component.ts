@@ -30,11 +30,19 @@ export class FormularioComponent implements OnInit{
     sobrenome: '',
     idade: null,
     sexo: 'N',
-    dataNascimento: '',
-    loginError: false
+    dataNascimento: ''
   };
 
-  
+  onSave(){
+    if (this.isValid()) {
+      console.log(this.pessoa);
+      this.salvarDados();
+    }
+  }
+
+  isValid(){
+    return this.pessoa.nome && this.pessoa.sobrenome && this.pessoa.idade && this.pessoa.dataNascimento
+  }
 
   constructor(
     private fb: FormBuilder
@@ -52,13 +60,16 @@ export class FormularioComponent implements OnInit{
 
     errorMessage(){
       console.log('Campo vazio ou faltando informação.');
-      //alert("Campo vazio ou faltando informação.");
-      this.pessoa.loginError = true;
+      alert(
+        " Campo vazio ou faltando informação\n" +
+        " Campo nome e sobrenome deve ser texto\n" +
+        " Campo númerico só aceita números"
+      );
       
     }
 
   salvarDados() {
-    if (this.pessoa.nome && this.pessoa.sobrenome && this.pessoa.idade && this.pessoa.dataNascimento && this.pessoa.loginError) {
+    if (this.pessoa.nome && this.pessoa.sobrenome && this.pessoa.idade && this.pessoa.dataNascimento) {
       this.formCadastro.dirty;
       console.log(this.pessoa);
       this.pessoa = {
@@ -66,8 +77,7 @@ export class FormularioComponent implements OnInit{
         sobrenome: '',
         idade: null,
         sexo: 'N',
-        dataNascimento: '',
-        loginError: false
+        dataNascimento: ''
       };
     }else{
       //this.pessoa.loginError = true;
